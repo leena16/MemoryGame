@@ -19,12 +19,69 @@ Card.Preloader.prototype = {
 		this.load.image('instructions', 'img/instructions.png');
 		this.load.image('title', 'img/title.png');
 		this.load.image('high-title', 'img/high-title.png');
-		this.load.image('crd1', 'img/crd1.png');
-		this.load.image('crd2', 'img/crd2.png');
-		this.load.image('crd3', 'img/crd3.png');
-		this.load.image('card-back', 'img/card-back.png');
-		this.load.image('card-backk', 'img/card-backk.png');
-		this.load.image('frame3', 'img/frame3.png')
+		//this.load.image('crd1', 'img/crd1.png');
+		//this.load.image('crd2', 'img/crd2.png');
+		//this.load.image('crd3', 'img/crd3.png');
+		//this.load.image('card-back', 'img/card-back.png');
+		//this.load.image('card-backk', 'img/card-backk.png');
+		this.load.image('blur','img/blur.png')
+		this.load.image('framescroll', 'img/framescroll.png');
+		this.load.image('2c', 'img/cards/2c.png');
+		this.load.image('3c', 'img/cards/3c.png');
+		this.load.image('4c', 'img/cards/4c.png');
+		this.load.image('5c', 'img/cards/5c.png');
+		this.load.image('6c', 'img/cards/6c.png');
+		this.load.image('7c', 'img/cards/7c.png');
+		this.load.image('8c', 'img/cards/8c.png');
+		this.load.image('9c', 'img/cards/9c.png');
+		this.load.image('10c', 'img/cards/10c.png');
+		this.load.image('ac', 'img/cards/ac.png');
+		this.load.image('jc', 'img/cards/jc.png');
+		this.load.image('qc', 'img/cards/jc.png');
+		this.load.image('kc', 'img/cards/jc.png');
+
+		this.load.image('2d', 'img/cards/2d.png');
+		this.load.image('3d', 'img/cards/3d.png');
+		this.load.image('4d', 'img/cards/4d.png');
+		this.load.image('5d', 'img/cards/5d.png');
+		this.load.image('6d', 'img/cards/6d.png');
+		this.load.image('7d', 'img/cards/7d.png');
+		this.load.image('8d', 'img/cards/8d.png');
+		this.load.image('9d', 'img/cards/9d.png');
+		this.load.image('10d', 'img/cards/10d.png');
+		this.load.image('ad', 'img/cards/ad.png');
+		this.load.image('jd', 'img/cards/jd.png');
+		this.load.image('qd', 'img/cards/qd.png');
+		this.load.image('kd', 'img/cards/kd.png');
+
+		this.load.image('2s', 'img/cards/2s.png');
+		this.load.image('3s', 'img/cards/3s.png');
+		this.load.image('4s', 'img/cards/4s.png');
+		this.load.image('5s', 'img/cards/5s.png');
+		this.load.image('6s', 'img/cards/6s.png');
+		this.load.image('7s', 'img/cards/7s.png');
+		this.load.image('8s', 'img/cards/8s.png');
+		this.load.image('9s', 'img/cards/9s.png');
+		this.load.image('10s', 'img/cards/10s.png');
+		this.load.image('as', 'img/cards/as.png');
+		this.load.image('js', 'img/cards/js.png');
+		this.load.image('qs', 'img/cards/qs.png');
+		this.load.image('ks', 'img/cards/ks.png');
+
+		this.load.image('2h', 'img/cards/2h.png');
+		this.load.image('3h', 'img/cards/3h.png');
+		this.load.image('4h', 'img/cards/4h.png');
+		this.load.image('5h', 'img/cards/5h.png');
+		this.load.image('6h', 'img/cards/6h.png');
+		this.load.image('7h', 'img/cards/7h.png');
+		this.load.image('8h', 'img/cards/8h.png');
+		this.load.image('9h', 'img/cards/9h.png');
+		this.load.image('10h', 'img/cards/10h.png');
+		this.load.image('ah', 'img/cards/ah.png');
+		this.load.image('jh', 'img/cards/jh.png');
+		this.load.image('qh', 'img/cards/qh.png');
+		this.load.image('kh', 'img/cards/kh.png');
+
 		//this.load.image('button-pause', 'img/button-pause.png')
 		//this.load.image('button-close', 'img/button-close.png')
 		
