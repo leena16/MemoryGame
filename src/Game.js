@@ -7,7 +7,7 @@ Card.Game = function(game){
 	cardNames=new Array();
 	var change;
 	var timeLimit;
-  	var t1;
+  	var timesUpText;
     var mySeconds;
     myCountdownSeconds = 10;
     timesUp = null;
@@ -17,18 +17,23 @@ Card.Game = function(game){
 Card.Game.prototype = {
 
 	create: function(){
+
+		// Add all display elements.
 		this.add.sprite(0, 0, 'background2');
 		this.add.sprite(0,0,'strip'); 
-		// add pause button and close button
 		this.add.button(670, 0, 'button-pause', this.managePause, this,1,0,2);
 		this.add.button(730, 0, 'button-close', this.close, this,1,0,2);
-
-		t1 = this.add.text( 400, 10, timesUp,this._fontStyle);
+		timesUpText = this.add.text( 400, 10, timesUp,this._fontStyle);
    		t = this.add.text( 10, 10, 'Time: ' + myCountdownSeconds,this._fontStyle);
    	
+   		this.displayFaceDownCards();
    	
-   		//var cards =[];
-		
+   		//faceDown[i][j].inputEnabled = true;
+   		//faceDown[i][j].event.onDown.add(this.flip,this);
+   
+ },
+
+ 	displayFaceDownCards: function() {
  		var chars = ["h", "s", "d", "c"];
 
 		for (var i = 0; i < 4; i++) {
@@ -37,34 +42,22 @@ Card.Game.prototype = {
 			};
 		};
 
-
 		for (var i = cardNames.length-1; i > 0; i--) { 
-		this.randomize(cardNames);
+			this.randomize(cardNames);
 		}
-		
-
 		
 		var counter = 0;
 		for(var r = 0; r < 5; r++){
 			for(var c = 0; c < 11; c++){
 		   		board[c][r] = cardNames[counter];
 		   		this.add.sprite(2+c*72, 52+r*102,board[c][r]);
-		   		/*if(!(board[r][c]==null)){
-		   			for(var i = 0; i < 11; i++){
-		   				for(var j = 0; j < 5; j++){
-		   					faceDown[i][j] = this.add.sprite(2+r*72, 52+c*102,'card-back');
-		   				}
-		   			}
-		   		}*/
+		   		this.add.sprite(2+c*72, 52+r*102,"card-back");
 				counter++;
+				if (counter == 52) { break; }
 			 }
+			 if (counter == 52) { break; }
 		}
-   	
-   		//faceDown[i][j].inputEnabled = true;
-   		//faceDown[i][j].event.onDown.add(this.flip,this);
-   
- },
-
+ 	},
 
 	randomize: function(){
 		
