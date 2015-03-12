@@ -5,6 +5,7 @@ Card.Game = function(game){
 		}
 	this.cards=null;
 	cardNames=new Array();
+	
 	var change;
 	var timeLimit;
   	var t1;
@@ -16,11 +17,6 @@ Card.Game = function(game){
 };
 Card.Game.prototype = {
 
-	init: function(){
-		
-
-	},
-	
 	create: function(){
 		this.add.sprite(0, 0, 'background2');
 		this.add.sprite(0,0,'strip'); 
@@ -123,14 +119,19 @@ for (var i = 0; i < n; i++)
 			for(var c = 0; c < 5; c++){
 		   		board[r][c] = cardNames[counter];
 		   		this.add.sprite(2+r*72, 52+c*102,board[r][c]);
-		   		//console.log(board[2][11]);
-		   		if(!(board[r][c]==null)){
-		   		this.add.sprite(2+r*72, 52+c*102,'card-back');
-		   		}
+		   		/*if(!(board[r][c]==null)){
+		   			for(var i = 0; i < 11; i++){
+		   				for(var j = 0; j < 5; j++){
+		   					faceDown[i][j] = this.add.sprite(2+r*72, 52+c*102,'card-back');
+		   				}
+		   			}
+		   		}*/
 				counter++;
 			 }
 		}
    	
+   		//faceDown[i][j].inputEnabled = true;
+   		//faceDown[i][j].event.onDown.add(this.flip,this);
    	/*if(r<11 && c==0){
 	this.add.sprite(2+r*72, 52,board[r][c]);
 	//this.add.sprite(2+r*72,52,'card-back');
@@ -153,9 +154,13 @@ for (var i = 0; i < n; i++)
 	}*/
 	//this.add.sprite(2+r*72, 156,board[r][c]);
 	
+ 		
  
  
- 
+	},
+	flip: function(){
+		
+
 	},
 
 
