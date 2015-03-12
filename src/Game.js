@@ -1,8 +1,4 @@
 Card.Game = function(game){
-	board = new Array(11);
-		for(i = 0; i < 11; i++) {
-			board[i] = new Array(5);
-		}
 	this.cards=null;
 	cardNames=new Array();
 	var change;
@@ -27,10 +23,6 @@ Card.Game.prototype = {
    		t = this.add.text( 10, 10, 'Time: ' + myCountdownSeconds,this._fontStyle);
    	
    		this.displayFaceDownCards();
-   	
-   		//faceDown[i][j].inputEnabled = true;
-   		//faceDown[i][j].event.onDown.add(this.flip,this);
-   
  },
 
  	displayFaceDownCards: function() {
@@ -49,14 +41,19 @@ Card.Game.prototype = {
 		var counter = 0;
 		for(var r = 0; r < 5; r++){
 			for(var c = 0; c < 11; c++){
-		   		board[c][r] = cardNames[counter];
-		   		this.add.sprite(2+c*72, 52+r*102,board[c][r]);
-		   		this.add.sprite(2+c*72, 52+r*102,"card-back");
+		   		this.add.sprite(2+c*72, 52+r*102,cardNames[counter]);
+		   		faceDownButton = this.add.button(2+c*72, 52+r*102,"card-back", this.faceDownButtonClicked, this);
+		   		faceDownButton.counter = counter;
 				counter++;
 				if (counter == 52) { break; }
 			 }
 			 if (counter == 52) { break; }
 		}
+ 	},
+
+ 	faceDownButtonClicked: function(button) {
+ 		alert(button.counter);
+ 		button.visible = false;
  	},
 
 	randomize: function(){
@@ -70,87 +67,7 @@ Card.Game.prototype = {
    		return cardNames;
 		
 	},
-	
 
-	close: function(){
-		this.state.start("MainMenu");
-	},
-	managePause: function(){
-		// pause the game
-		this.game.paused = true;
-		
-		
-		// add proper informational text
-		//var pausedText = this.add.text(200, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
-		var blurScreen = this.add.sprite(0,0,'blur')
-		var pausedText = this.add.sprite(170, 50, 'framescroll');
-		
-
-		//var resume = this.add.button(300,320,'button-resume',this.resumeScreen,this,1,0,2);
-		var resume = this.add.button(300,320,'button-resume');
-		//this.timer.pause();
-
-		this.add.tween(pausedText,resume)
-			.to({ x: 400 },400)
-			.start();
-  	
-   /*	resumeScreen: function(){
-	   			blurScreen.destroy();
-				pausedText.destroy();
-				resume.destroy();
-				//this.timer.resume();
-
-				// unpause the game
-				this.game.paused = false;
-			}, */
-
-   	
-
-
-		
-		//this.add.sprite(100,100,'frame');
-		// set event listener for the user's click/tap the screen
-		this.input.onDown.add(function(){
-			// remove the pause text
-			blurScreen.destroy();
-			pausedText.destroy();
-			resume.destroy();
-			//this.timer.resume();
-
-			// unpause the game
-			this.game.paused = false;
-		}, this);
-	},
-
-	
 	update: function(){
-
-	
-		var timeLimit = 120;
-	  	
-	    mySeconds =Math.round(this.time.totalElapsedSeconds());
-
-	    
-	    myCountdownSeconds =timeLimit - mySeconds;
-	    myMinutes =Math.floor(myCountdownSeconds / 60);
-	    
-
-	    if (myCountdownSeconds <= 00 && myMinutes <= 0) 
-	    {	
-	    	
-	        timesUp = 'Time is up!';   
-	        t1.setText(timesUp);
-	        timeLimit.destroy();
-
-	    }
-	    else if ((myCountdownSeconds % 60) < 10){
-	    	myCountdownSeconds = t.setText('Time '+ myMinutes + ':'+ '0' + (myCountdownSeconds % 60));
-	    }
-	    
-	   
-	    else
-	    {
-	    	t.setText('Time ' + myMinutes + ':' + (myCountdownSeconds % 60));
-	    } 
 	}
 };
