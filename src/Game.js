@@ -5,7 +5,6 @@ Card.Game = function(game){
 		}
 	this.cards=null;
 	cardNames=new Array();
-	
 	var change;
 	var timeLimit;
   	var t1;
@@ -38,87 +37,18 @@ Card.Game.prototype = {
 			};
 		};
 
-		
-
-/*var n = 52;
-var card_names = new Array();
-for (var i = 0; i < n; i++)
-    card_names.push({name: '2c', pairNum:1, x:null, y:null}, {name: '3c', pairNum:2, x:null, y:null}); */
-/* card_names[0] = {name: '2c', pairNum:1, x:null, y:null};
- card_names[1] = {name: '3c', pairNum:2, x:null, y:null};
- card_names[2] = {name: '4c', pairNum:3, x:null, y:null};
- card_names[3] = {name: '5c', pairNum:4, x:null, y:null};
- card_names[4] = {name: '6c', pairNum:5, x:null, y:null};
- card_names[5] = {name: '7c', pairNum:6, x:null, y:null};
- card_names[6] = {name: '8c', pairNum:7, x:null, y:null};
- card_names[7] = {name: '9c', pairNum:8, x:null, y:null};
- card_names[8] = {name: '10c', pairNum:9, x:null, y:null};
- card_names[9] = {name: 'ac', pairNum:10, x:null, y:null};
- card_names[10] = {name: 'jc', pairNum:11, x:null, y:null};
- card_names[11] = {name: 'kc', pairNum:12, x:null, y:null};
- card_names[12] = {name: 'qc', pairNum:13, x:null, y:null};
-
- card_names[13] = {name: '2s', pairNum:1, x:null, y:null};
- card_names[14] = {name: '3s', pairNum:2, x:null, y:null};
- card_names[15] = {name: '4s', pairNum:3, x:null, y:null};
- card_names[16] = {name: '5s', pairNum:4, x:null, y:null};
- card_names[17] = {name: '6s', pairNum:5, x:null, y:null};
- card_names[18] = {name: '7s', pairNum:6, x:null, y:null};
- card_names[19] = {name: '8s', pairNum:7, x:null, y:null};
- card_names[20] = {name: '9s', pairNum:8, x:null, y:null};
- card_names[21] = {name: '10s', pairNum:9, x:null, y:null};
- card_names[22] = {name: 'as', pairNum:10, x:null, y:null};
- card_names[23] = {name: 'js', pairNum:11, x:null, y:null};
- card_names[24] = {name: 'ks', pairNum:12, x:null, y:null};
- card_names[25] = {name: 'qs', pairNum:13, x:null, y:null};
-
- card_names[26] = {name: '2d', pairNum:14, x:null, y:null};
- card_names[27] = {name: '3d', pairNum:15, x:null, y:null};
- card_names[28] = {name: '4d', pairNum:16, x:null, y:null};
- card_names[29] = {name: '5d', pairNum:17, x:null, y:null};
- card_names[30] = {name: '6d', pairNum:18, x:null, y:null};
- card_names[31] = {name: '7d', pairNum:19, x:null, y:null};
- card_names[32] = {name: '8d', pairNum:20, x:null, y:null};
- card_names[33] = {name: '9d', pairNum:21, x:null, y:null};
- card_names[34] = {name: '10d', pairNum:22, x:null, y:null};
- card_names[35] = {name: 'ad', pairNum:23, x:null, y:null};
- card_names[36] = {name: 'jd', pairNum:24, x:null, y:null};
- card_names[37] = {name: 'kd', pairNum:25, x:null, y:null};
- card_names[38] = {name: 'qd', pairNum:26, x:null, y:null};
-
- card_names[39] = {name: '2h', pairNum:14, x:null, y:null};
- card_names[40] = {name: '3h', pairNum:15, x:null, y:null};
- card_names[41] = {name: '4h', pairNum:16, x:null, y:null};
- card_names[42] = {name: '5h', pairNum:17, x:null, y:null};
- card_names[43] = {name: '6h', pairNum:18, x:null, y:null};
- card_names[44] = {name: '7h', pairNum:19, x:null, y:null};
- card_names[45] = {name: '8h', pairNum:20, x:null, y:null};
- card_names[46] = {name: '9h', pairNum:21, x:null, y:null};
- card_names[47] = {name: '10h', pairNum:22, x:null, y:null};
- card_names[48] = {name: 'ah', pairNum:23, x:null, y:null};
- card_names[49] = {name: 'jh', pairNum:24, x:null, y:null};
- card_names[50] = {name: 'kh', pairNum:25, x:null, y:null};
- card_names[51] = {name: 'qh', pairNum:26, x:null, y:null};  */
-
- /*var match = new Array( 
- 		[card_names[0],card_names[22]],
- 		[card_names[1],card_names[23]],
- 		);*/
- 
-
-
 
 		for (var i = cardNames.length-1; i > 0; i--) { 
 		this.randomize(cardNames);
 		}
-		//console.log(card_names);
+		
 
-		//
+		
 		var counter = 0;
-		for(var r = 0; r < 11; r++){
-			for(var c = 0; c < 5; c++){
-		   		board[r][c] = cardNames[counter];
-		   		this.add.sprite(2+r*72, 52+c*102,board[r][c]);
+		for(var r = 0; r < 5; r++){
+			for(var c = 0; c < 11; c++){
+		   		board[c][r] = cardNames[counter];
+		   		this.add.sprite(2+c*72, 52+r*102,board[c][r]);
 		   		/*if(!(board[r][c]==null)){
 		   			for(var i = 0; i < 11; i++){
 		   				for(var j = 0; j < 5; j++){
@@ -132,36 +62,8 @@ for (var i = 0; i < n; i++)
    	
    		//faceDown[i][j].inputEnabled = true;
    		//faceDown[i][j].event.onDown.add(this.flip,this);
-   	/*if(r<11 && c==0){
-	this.add.sprite(2+r*72, 52,board[r][c]);
-	//this.add.sprite(2+r*72,52,'card-back');
-	}
-	else if(r<22 && c==1){
-	this.add.sprite(2+r*72, 156,board[r][c]);
-
-	}
-	else if(r<33 && c==2){
-	this.add.sprite(2+r*72, 260,board[r][c]);
-
-	}
-	else if(r<44 && c==3){
-	this.add.sprite(2+r*72, 364,board[r][c]);
-
-	}
-	else if(r<52 && c==4){
-	this.add.sprite(2+r*72, 468,board[r][c]);
-
-	}*/
-	//this.add.sprite(2+r*72, 156,board[r][c]);
-	
- 		
- 
- 
-	},
-	flip: function(){
-		
-
-	},
+   
+ },
 
 
 	randomize: function(){
