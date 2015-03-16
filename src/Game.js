@@ -1,6 +1,13 @@
 Card.Game = function(game){
 	this.cards=null;
-	cardNames=new Array();
+	cards=new Array();
+	faceUpCards = new Array();
+	faceDownButton = new Array();
+	counter = 0;
+
+	firstClickIndex = 0;
+	secondClickIndex = 0;
+	click = 0;
 	var change;
 	var timeLimit;
   	var timesUpText;
@@ -24,50 +31,89 @@ Card.Game.prototype = {
    	
    		this.displayFaceDownCards();
  },
-
  	displayFaceDownCards: function() {
  		var chars = ["h", "s", "d", "c"];
-
+ 		
 		for (var i = 0; i < 4; i++) {
 			for (var j = 0; j < 13; j++) {
-				cardNames[j+13*i]= (j+1)+ chars[i];
+				cards[j+13*i] = { name: (j+1)+ chars[i], button: null, image: null }
 			};
 		};
 
-		for (var i = cardNames.length-1; i > 0; i--) { 
-			this.randomize(cardNames);
+		for (var i = cards.length-1; i > 0; i--) { 
+			this.randomize(cards);
 		}
 		
-		var counter = 0;
 		for(var r = 0; r < 5; r++){
 			for(var c = 0; c < 11; c++){
-		   		this.add.sprite(2+c*72, 52+r*102,cardNames[counter]);
-		   		faceDownButton = this.add.button(2+c*72, 52+r*102,"card-back", this.faceDownButtonClicked, this);
-		   		faceDownButton.counter = counter;
+
+
+		   		image = this.add.sprite(2+c*72, 52+r*102, cards[counter].name);
+		   		button = this.add.button(2+c*72, 52+r*102,"card-back", this.faceDownButtonClicked, this);
+				button.counter = counter;		   		
+
+		   		cards[counter].button = button;
+		   		cards[counter].image = image;
+
 				counter++;
 				if (counter == 52) { break; }
 			 }
 			 if (counter == 52) { break; }
 		}
+	
+		
  	},
 
  	faceDownButtonClicked: function(button) {
- 		alert(button.counter);
+ 		//alert(button.counter);
  		button.visible = false;
+ 		click++;
+ 		
+ 		if(click==1){
+ 			firstClickIndex = button.counter;
+ 		}
+ 		else if(click==2){
+ 			secondClickIndex = button.counter;
+ 			click = 0;
+ 			this.isMatchFound();
+ 		}
+ 		
+ 		
  	},
+ 	isMatchFound: function(){
+ 		
+ 		if((parseInt(cards[firstClickIndex].name.match(/\d+/))) == (parseInt(cards[secondClickIndex].name.match(/\d+/))))
+ 		{	
+ 			//alert('match found');
+
+ 			cards[firstClickIndex].image.destroy();
+ 			cards[secondClickIndex].image.destroy();
+ 		}
+ 		else
+ 		{
+ 			//alert('no match found');
+ 			setTimeout(function(){cards[firstClickIndex].button.visible = true; cards[secondClickIndex].button.visible = true;
+ 			secondClickIndex = 0;},200);
+
+ 			
+ 		}
+
+ 	},
+ 	
 
 	randomize: function(){
 		
-		for (var i = cardNames.length - 1; i > 0; i--) {
+		for (var i = cards.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = cardNames[i];
-        cardNames[i] = cardNames[j];
-        cardNames[j] = temp;
+        var temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
     	}
-   		return cardNames;
+   		return cards;
 		
 	},
 
 	update: function(){
 	}
+
 };
