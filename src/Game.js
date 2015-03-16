@@ -1,10 +1,10 @@
 Card.Game = function(game){
 	this.cards=null;
 	cards=new Array();
-	faceUpCards = new Array();
+	
 	faceDownButton = new Array();
 	counter = 0;
-
+	count = 52;
 	firstClickIndex = 0;
 	secondClickIndex = 0;
 	click = 0;
@@ -84,19 +84,26 @@ Card.Game.prototype = {
  		
  		if((parseInt(cards[firstClickIndex].name.match(/\d+/))) == (parseInt(cards[secondClickIndex].name.match(/\d+/))))
  		{	
- 			//alert('match found');
-
- 			cards[firstClickIndex].image.destroy();
+			cards[firstClickIndex].image.destroy();
  			cards[secondClickIndex].image.destroy();
+ 			count = count - 2;
+
  		}
  		else
  		{
- 			//alert('no match found');
  			setTimeout(function(){cards[firstClickIndex].button.visible = true; cards[secondClickIndex].button.visible = true;
  			secondClickIndex = 0;},200);
+ 			if(count == 0){
+ 				alert("game over");
+ 				this.state.start("HighestScores");
+ 			}
+ 			else{
+ 				console.log(count);
+ 			}
 
  			
  		}
+
 
  	},
  	
