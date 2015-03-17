@@ -6,9 +6,9 @@ Card.MainMenu.prototype = {
 		this.add.sprite(75, 60, 'title');
 		
 		//this.add.sprite((Candy.GAME_WIDTH-395)/2, 300, 'button-instructions');
-		this.add.button(250, 200, 'button-instructions', this.instructions, this,1,0,2);
-		this.add.button(250, 300, 'button-highestscores',this.highestScores, this,1,0,2);
-		this.add.button(250	,400, 'button-play', this.startGame, this,1,0,2);
+		this.add.button(250, 300, 'button-instructions', this.instructions, this,1,0,2);
+		this.add.button(250, 400, 'button-leaderboard',this.leaderboard, this,1,0,2);
+		this.add.button(250	,200, 'button-play', this.startGame, this,1,0,2);
 		
 	},
 	startGame: function() {
@@ -17,7 +17,7 @@ Card.MainMenu.prototype = {
 	instructions: function(){
 		this.state.start("Instructions");
 	},
-	highestScores: function(){
-		this.state.start("HighestScores");
+	leaderboard: function(){
+		this.state.start("Leaderboard");
 	}
 };

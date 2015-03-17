@@ -18,10 +18,9 @@ Card.Preloader.prototype = {
 		this.load.image('strip', 'img/strip.png');
 		this.load.image('instructions', 'img/instructions.png');
 		this.load.image('title', 'img/title.png');
-		this.load.image('high-title', 'img/high-title.png');
+		this.load.image('leaderboard-title', 'img/leaderboard-title.png');
 		this.load.image('card-back', 'img/card-back.png');
 		this.load.image('blur','img/blur.png')
-		this.load.image('framescroll', 'img/framescroll.png');
 		
 		this.load.image('1c', 'img/cards/1c.png');
 		this.load.image('2c', 'img/cards/2c.png');
@@ -84,7 +83,7 @@ Card.Preloader.prototype = {
 		// load spritesheets
 		this.load.spritesheet('button-play', 'img/button-play.png', 274, 71);
 		this.load.spritesheet('button-instructions', 'img/button-instructions.png', 274, 71);
-		this.load.spritesheet('button-highestscores', 'img/button-highestscores.png', 274, 71);
+		this.load.spritesheet('button-leaderboard', 'img/button-leaderboard.png', 274, 71);
 		this.load.spritesheet('button-back', 'img/button-back.png', 160, 54);
 		this.load.spritesheet('button-pause', 'img/button-pause.png', 50, 49);
 		this.load.spritesheet('button-close', 'img/button-close.png', 50, 49);

@@ -1,20 +1,18 @@
 Card.Game = function(game){
 	this.cards=null;
 	cards=new Array();
-	
 	faceDownButton = new Array();
 	counter = 0;
 	count = 52;
 	firstClickIndex = 0;
 	secondClickIndex = 0;
 	click = 0;
-	var change;
+	score = 0;
+	scoreText =0;
 	var timeLimit;
-  	var timesUpText;
-    var mySeconds;
-    myCountdownSeconds = 10;
-    timesUp = null;
-    this._fontStyle = { font: "30px Old English", fill: "#FFCC00", stroke: "#333", strokeThickness: 5};
+	var mySeconds;
+	timeText = null;
+    this._fontStyle = { font: "30px Old English", fill: "#FFCC00" };
 	
 };
 Card.Game.prototype = {
@@ -26,11 +24,26 @@ Card.Game.prototype = {
 		this.add.sprite(0,0,'strip'); 
 		this.add.button(670, 0, 'button-pause', this.managePause, this,1,0,2);
 		this.add.button(730, 0, 'button-close', this.close, this,1,0,2);
-		timesUpText = this.add.text( 400, 10, timesUp,this._fontStyle);
-   		t = this.add.text( 10, 10, 'Time: ' + myCountdownSeconds,this._fontStyle);
+   		timeText = this.add.text( 10, 10, '00:00' , this._fontStyle);
+   		scoreText = this.add.text( 500, 10, 'Score ', this._fontStyle);
    	
    		this.displayFaceDownCards();
- },
+ 	},
+ 	managePause: function(){
+		// pause the game
+		this.game.paused = true;
+		var blurImage = this.add.sprite(0,0,'blur');
+		// add proper informational text
+		var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+		// set event listener for the user's click/tap the screen
+		this.input.onDown.add(function(){
+			// remove the pause text
+			blurImage.destroy();
+			pausedText.destroy();
+			// unpause the game
+			this.game.paused = false;
+		}, this);
+	},
  	displayFaceDownCards: function() {
  		var chars = ["h", "s", "d", "c"];
  		
@@ -71,6 +84,7 @@ Card.Game.prototype = {
  		
  		if(click==1){
  			firstClickIndex = button.counter;
+ 			
  		}
  		else if(click==2){
  			secondClickIndex = button.counter;
@@ -84,28 +98,22 @@ Card.Game.prototype = {
  		
  		if((parseInt(cards[firstClickIndex].name.match(/\d+/))) == (parseInt(cards[secondClickIndex].name.match(/\d+/))))
  		{	
-			cards[firstClickIndex].image.destroy();
- 			cards[secondClickIndex].image.destroy();
+			cards[firstClickIndex].image.kill();
+ 			cards[secondClickIndex].image.kill();
  			count = count - 2;
-
+ 			if(count == 0){
+ 				//alert("game over");
+ 				this.state.start("Leaderboard",true, false, score);
+ 			}
+ 			score = score + 10;
  		}
  		else
  		{
  			setTimeout(function(){cards[firstClickIndex].button.visible = true; cards[secondClickIndex].button.visible = true;
- 			secondClickIndex = 0;},200);
- 			if(count == 0){
- 				alert("game over");
- 				this.state.start("HighestScores");
- 			}
- 			else{
- 				console.log(count);
- 			}
-
+ 			secondClickIndex = 0;},300);
  			
  		}
-
-
- 	},
+	},
  	
 
 	randomize: function(){
@@ -119,8 +127,22 @@ Card.Game.prototype = {
    		return cards;
 		
 	},
+	close: function(){
+		this.state.start("MainMenu");
+	},
 
 	update: function(){
+		scoreText.setText('Score: '+score);
+		mySeconds =Math.round(this.time.totalElapsedSeconds());
+		myMinutes =Math.floor(mySeconds / 60);
+	    if ((mySeconds % 60) < 10){
+	    	mySeconds = timeText.setText('Time '+ myMinutes + ':'+ '0' + (mySeconds % 60));
+	    }
+	    else
+	    {
+	    	timeText.setText('Time ' + myMinutes + ':' + (mySeconds % 60));
+	    } 
 	}
+	
 
 };
