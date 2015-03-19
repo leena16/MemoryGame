@@ -7,8 +7,8 @@ Card.Preloader.prototype = {
 	preload: function(){
 		// set background color and preload image
 		this.stage.backgroundColor = '#C68D71';
-		this.bar = this.add.sprite((Card.GAME_WIDTH-311)/2, (Card.GAME_HEIGHT-27)/2, 'barbase');
-		this.preloadBar = this.add.sprite((Card.GAME_WIDTH-311)/2, (Card.GAME_HEIGHT-27)/2, 'preloaderBar');
+		this.bar = this.add.sprite((Card.GAME_WIDTH-400)/2, (Card.GAME_HEIGHT-14)/2, 'barbase');
+		this.preloadBar = this.add.sprite((Card.GAME_WIDTH-300)/2, (Card.GAME_HEIGHT-14)/2, 'preloaderBar');
 
 		this.load.setPreloadSprite(this.bar);
 		this.load.setPreloadSprite(this.preloadBar);
@@ -77,9 +77,6 @@ Card.Preloader.prototype = {
 		this.load.image('11h', 'img/cards/11h.png');
 		this.load.image('12h', 'img/cards/12h.png');
 		this.load.image('13h', 'img/cards/13h.png');
-
-		
-		
 		// load spritesheets
 		this.load.spritesheet('button-play', 'img/button-play.png', 274, 71);
 		this.load.spritesheet('button-instructions', 'img/button-instructions.png', 274, 71);
@@ -87,9 +84,10 @@ Card.Preloader.prototype = {
 		this.load.spritesheet('button-back', 'img/button-back.png', 160, 54);
 		this.load.spritesheet('button-pause', 'img/button-pause.png', 50, 49);
 		this.load.spritesheet('button-close', 'img/button-close.png', 50, 49);
-		this.load.spritesheet('button-home', 'img/button-home.png', 160, 54);
-		this.load.spritesheet('button-resume', 'img/button-resume.png', 160, 54);
-		this.load.spritesheet('button-exit', 'img/button-exit.png', 160, 54);
+		this.load.spritesheet('button-mainMenu', 'img/button-mainMenu.png', 210, 54);
+		this.load.spritesheet('button-playAgain', 'img/button-playAgain.png', 210, 54);
+		//this.load.spritesheet('button-resume', 'img/button-resume.png', 160, 54);
+		
 	},
 	create: function(){
 		// start the MainMenu state

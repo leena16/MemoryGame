@@ -9,7 +9,8 @@ Card.Game = function(game){
 	click = 0;
 	score = 0;
 	scoreText =0;
-	var timeLimit;
+	timeDisplay = 0;
+	var seconds
 	var mySeconds;
 	timeText = null;
     this._fontStyle = { font: "30px Old English", fill: "#FFCC00" };
@@ -33,15 +34,15 @@ Card.Game.prototype = {
 		// pause the game
 		this.game.paused = true;
 		var blurImage = this.add.sprite(0,0,'blur');
-		// add proper informational text
 		var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+		
 		// set event listener for the user's click/tap the screen
 		this.input.onDown.add(function(){
-			// remove the pause text
-			blurImage.destroy();
-			pausedText.destroy();
-			// unpause the game
-			this.game.paused = false;
+		// remove the pause text
+		blurImage.destroy();
+		pausedText.destroy();
+		// unpause the game
+		this.game.paused = false;
 		}, this);
 	},
  	displayFaceDownCards: function() {
@@ -91,8 +92,6 @@ Card.Game.prototype = {
  			click = 0;
  			this.isMatchFound();
  		}
- 		
- 		
  	},
  	isMatchFound: function(){
  		
@@ -101,22 +100,18 @@ Card.Game.prototype = {
 			cards[firstClickIndex].image.kill();
  			cards[secondClickIndex].image.kill();
  			count = count - 2;
- 			if(count == 0){
- 				//alert("game over");
- 				this.state.start("Leaderboard",true, false, score);
- 			}
  			score = score + 10;
+ 			if(count == 0){
+ 				this.state.start("Leaderboard",true, false, score, myMinutes,mySeconds);
+ 			}
  		}
  		else
  		{
  			setTimeout(function(){cards[firstClickIndex].button.visible = true; cards[secondClickIndex].button.visible = true;
  			secondClickIndex = 0;},300);
- 			
  		}
 	},
- 	
-
-	randomize: function(){
+ 	randomize: function(){
 		
 		for (var i = cards.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -125,22 +120,28 @@ Card.Game.prototype = {
         cards[j] = temp;
     	}
    		return cards;
-		
 	},
 	close: function(){
+		
 		this.state.start("MainMenu");
 	},
-
 	update: function(){
+		
 		scoreText.setText('Score: '+score);
-		mySeconds =Math.round(this.time.totalElapsedSeconds());
-		myMinutes =Math.floor(mySeconds / 60);
-	    if ((mySeconds % 60) < 10){
-	    	mySeconds = timeText.setText('Time '+ myMinutes + ':'+ '0' + (mySeconds % 60));
+		seconds =Math.round(this.time.totalElapsedSeconds());
+		myMinutes =Math.floor(seconds / 60);
+		mySeconds = seconds % 60
+	    if (mySeconds < 10){
+	    	timeDisplay = timeText.setText('Time '+ myMinutes + ':'+ '0' + mySeconds);
 	    }
+	    //else if(mySeconds==10){
+	    //	this.state.start("Leaderboard",true, false, score, myMinutes,mySeconds);
+
+	    //}
+
 	    else
 	    {
-	    	timeText.setText('Time ' + myMinutes + ':' + (mySeconds % 60));
+	    	timeDisplay = timeText.setText('Time ' + myMinutes + ':' + mySeconds);
 	    } 
 	}
 	
