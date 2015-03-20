@@ -9,14 +9,14 @@ Card.Game = function(game){
 	click = 0;
 	score = 0;
 	scoreText =0;
-	timeDisplay = 0;
-	var seconds
-	var mySeconds;
-	timeText = null;
+	this.mySeconds = 0; 
+	this.myMinutes = 0;
     this._fontStyle = { font: "30px Old English", fill: "#FFCC00" };
-	
+
+ 
 };
 Card.Game.prototype = {
+	
 
 	create: function(){
 
@@ -25,9 +25,10 @@ Card.Game.prototype = {
 		this.add.sprite(0,0,'strip'); 
 		this.add.button(670, 0, 'button-pause', this.managePause, this,1,0,2);
 		this.add.button(730, 0, 'button-close', this.close, this,1,0,2);
-   		timeText = this.add.text( 10, 10, '00:00' , this._fontStyle);
    		scoreText = this.add.text( 500, 10, 'Score ', this._fontStyle);
-   	
+   		this.timerText = this.game.add.text(10, 10, 'Time 00:00' + this.mySeconds,this._fontStyle);
+   		this.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
+		
    		this.displayFaceDownCards();
  	},
  	managePause: function(){
@@ -43,7 +44,7 @@ Card.Game.prototype = {
 		pausedText.destroy();
 		// unpause the game
 		this.game.paused = false;
-		}, this);
+		}, this);  
 	},
  	displayFaceDownCards: function() {
  		var chars = ["h", "s", "d", "c"];
@@ -125,25 +126,17 @@ Card.Game.prototype = {
 		
 		this.state.start("MainMenu");
 	},
-	update: function(){
-		
-		scoreText.setText('Score: '+score);
-		seconds =Math.round(this.time.totalElapsedSeconds());
-		myMinutes =Math.floor(seconds / 60);
-		mySeconds = seconds % 60
-	    if (mySeconds < 10){
-	    	timeDisplay = timeText.setText('Time '+ myMinutes + ':'+ '0' + mySeconds);
-	    }
-	    //else if(mySeconds==10){
-	    //	this.state.start("Leaderboard",true, false, score, myMinutes,mySeconds);
-
-	    //}
-
-	    else
-	    {
-	    	timeDisplay = timeText.setText('Time ' + myMinutes + ':' + mySeconds);
-	    } 
-	}
 	
+	updateCounter: function() {
+		this.mySeconds++;
+		this.myMinutes =Math.floor(this.mySeconds/ 60);
+		if (this.mySeconds < 10){
+	    	this.timerText.setText('Time '+ this.myMinutes + ':'+ '0' + this.mySeconds);
+ 	    }
+	    else
+ 	    {
+	    	this.timerText.setText('Time ' + this.myMinutes + ':' + this.mySeconds);
+  		}
+	}
 
 };
