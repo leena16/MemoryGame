@@ -130,9 +130,7 @@ Card.Game.prototype = {
 		if (this.mySeconds < 10){
 	    	this.timerText.setText('Time '+ this.myMinutes + ':'+ '0' + this.mySeconds);
  	    }
- 	    else if(this.mySeconds == 10){
- 	    	this.state.start("Leaderboard",true, false, this.myScore, this.myMinutes, this.mySeconds);
- 	    }
+ 	   
 	    else
  	    {
 	    	this.timerText.setText('Time ' + this.myMinutes + ':' + this.mySeconds);
