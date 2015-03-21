@@ -2,18 +2,10 @@ Card.Game = function(game){
 	this.cards=null;
 	cards=new Array();
 	faceDownButton = new Array();
-	counter = 0;
 	count = 52;
 	firstClickIndex = 0;
 	secondClickIndex = 0;
 	click = 0;
-	score = 0;
-	scoreText =0;
-	this.mySeconds = 0; 
-	this.myMinutes = 0;
-    this._fontStyle = { font: "30px Old English", fill: "#FFCC00" };
-
- 
 };
 Card.Game.prototype = {
 	
@@ -21,12 +13,16 @@ Card.Game.prototype = {
 	create: function(){
 
 		// Add all display elements.
+		this.myScore = 0;
+		this.seconds = 0;
+		this.mySeconds = 0; 
+		this.myMinutes = 0;
+		this.fontStyle = { font: "30px Cinzel Decorative", fill: "#FFCC00" };
 		this.add.sprite(0, 0, 'background2');
 		this.add.sprite(0,0,'strip'); 
 		this.add.button(670, 0, 'button-pause', this.managePause, this,1,0,2);
 		this.add.button(730, 0, 'button-close', this.close, this,1,0,2);
-   		scoreText = this.add.text( 500, 10, 'Score ', this._fontStyle);
-   		this.timerText = this.game.add.text(10, 10, 'Time 00:00' + this.mySeconds,this._fontStyle);
+   		this.timerText = this.game.add.text(10, 10, 'Time ' + this.mySeconds,this.fontStyle);
    		this.time.events.loop(Phaser.Timer.SECOND, this.updateCounter, this);
 		
    		this.displayFaceDownCards();
@@ -35,8 +31,7 @@ Card.Game.prototype = {
 		// pause the game
 		this.game.paused = true;
 		var blurImage = this.add.sprite(0,0,'blur');
-		var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
-		
+		var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this.fontStyle);
 		// set event listener for the user's click/tap the screen
 		this.input.onDown.add(function(){
 		// remove the pause text
@@ -58,13 +53,15 @@ Card.Game.prototype = {
 		for (var i = cards.length-1; i > 0; i--) { 
 			this.randomize(cards);
 		}
+
+		counter = 0;
 		
 		for(var r = 0; r < 5; r++){
 			for(var c = 0; c < 11; c++){
 
 
-		   		image = this.add.sprite(2+c*72, 52+r*102, cards[counter].name);
-		   		button = this.add.button(2+c*72, 52+r*102,"card-back", this.faceDownButtonClicked, this);
+		   		image = this.add.sprite(2+c*72, 56+r*106, cards[counter].name);
+		   		button = this.add.button(2+c*72, 56+r*106,"card-back", this.faceDownButtonClicked, this);
 				button.counter = counter;		   		
 
 		   		cards[counter].button = button;
@@ -80,7 +77,6 @@ Card.Game.prototype = {
  	},
 
  	faceDownButtonClicked: function(button) {
- 		//alert(button.counter);
  		button.visible = false;
  		click++;
  		
@@ -101,9 +97,9 @@ Card.Game.prototype = {
 			cards[firstClickIndex].image.kill();
  			cards[secondClickIndex].image.kill();
  			count = count - 2;
- 			score = score + 10;
+ 			this.myScore = this.myScore + 10;
  			if(count == 0){
- 				this.state.start("Leaderboard",true, false, score, myMinutes,mySeconds);
+ 				this.state.start("Leaderboard",true, false,this.myScore,this.myMinutes,this.mySeconds);
  			}
  		}
  		else
@@ -128,15 +124,22 @@ Card.Game.prototype = {
 	},
 	
 	updateCounter: function() {
-		this.mySeconds++;
-		this.myMinutes =Math.floor(this.mySeconds/ 60);
+		this.seconds++;
+		this.myMinutes =Math.floor(this.seconds/ 60);
+		this.mySeconds = this.seconds % 60;
 		if (this.mySeconds < 10){
 	    	this.timerText.setText('Time '+ this.myMinutes + ':'+ '0' + this.mySeconds);
+ 	    }
+ 	    else if(this.mySeconds == 10){
+ 	    	this.state.start("Leaderboard",true, false, this.myScore, this.myMinutes, this.mySeconds);
  	    }
 	    else
  	    {
 	    	this.timerText.setText('Time ' + this.myMinutes + ':' + this.mySeconds);
   		}
+	},
+	update: function(){
+		
 	}
 
 };

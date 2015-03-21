@@ -1,3 +1,9 @@
+window.WebFontConfig = {
+  google: {
+    families: ['Cinzel Decorative']
+  }
+};
+
 Card.Preloader = function(game){
 	// define width and height of the game
 	Card.GAME_WIDTH = 800;
