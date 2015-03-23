@@ -26,7 +26,8 @@ Card.Preloader.prototype = {
 		this.load.image('title', 'img/title.png');
 		this.load.image('leaderboard-title', 'img/leaderboard-title.png');
 		this.load.image('card-back', 'img/card-back.png');
-		this.load.image('blur','img/blur.png')
+		this.load.image('blur','img/blur.png');
+		this.load.image('star','img/star.png');
 		
 		this.load.image('1c', 'img/cards/1c.png');
 		this.load.image('2c', 'img/cards/2c.png');

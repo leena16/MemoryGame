@@ -98,6 +98,21 @@ Card.Game.prototype = {
  			cards[secondClickIndex].image.kill();
  			count = count - 2;
  			this.myScore = this.myScore + 10;
+
+ 			firstClickEmitter = this.add.emitter(cards[firstClickIndex].image.x, cards[firstClickIndex].image.y, 100);
+			firstClickEmitter.makeParticles('star');
+   			firstClickEmitter.minParticleScale = 0;
+    		firstClickEmitter.maxParticleScale = 0.2;
+    		firstClickEmitter.gravity = -1000;
+    		firstClickEmitter.start(true, 2000, null, 10);
+ 
+    		secondClickEmitter = this.add.emitter(cards[secondClickIndex].image.x, cards[secondClickIndex].image.y, 100);
+			secondClickEmitter.makeParticles('star');
+    		secondClickEmitter.minParticleScale = 0;
+    		secondClickEmitter.maxParticleScale = 0.2;	
+    		secondClickEmitter.gravity = -1000;
+    		secondClickEmitter.start(true, 2000, null, 10);
+
  			if(count == 0){
  				this.state.start("Leaderboard",true, false,this.myScore,this.myMinutes,this.mySeconds);
  			}
